@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <title>Infinity Ground</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      /* 防止滚动条出现 */
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      /* 根容器宽度为视口宽度 */
+      height: 100%;
+      /* 根容器高度为视口高度 */
+    }
+
+    #canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      /* canvas 宽度为视口宽度 */
+      height: 100%;
+      /* canvas 高度为视口高度 */
+    }
+
+    .center-image {
+      position: absolute;
+      /* bottom: 0; */
+      top: 80%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 720px;
+      /* 设置图片宽度 */
+      height: 1280px;
+      /* 设置图片高度 */
+      max-width: none;
+      /* 确保图片不会被压缩 */
+      z-index: 9999;
+      /* 确保图片位于最上层 */
+      pointer-events: none;
+      /* 防止图片阻挡其他元素的交互 */
+      overflow: hidden;
+      /* 防止内容超出图片尺寸 */
+    }
+
+    .center-image img {
+      width: 60%;
+      /* 使图片填满容器 */
+      height: 60%;
+      object-fit: contain;
+      /* 保持图片比例 */
+    }
+
+
+
+    /* 小屏幕设备 */
+    /* @media (min-width: 600px) and (max-width: 768px) {
+      .center-image img {
+        width: 60%; 
+      height: 60%;
+      object-fit: contain; 
+      }
+    } */
+
+    /* 中等屏幕设备 */
+    /* @media (min-width: 769px) and (max-width: 1024px) {
+      .center-image img {
+        width: 80%; 
+      height: 80%;
+      object-fit: contain; 
+      }
+    } */
+
+    /* 大屏幕设备 */
+    /* @media (min-width: 1025px) {
+      .center-image img {
+        width: 100%; 
+      height: 100%;
+      object-fit: contain; 
+      }
+    } */
+
+    .gif-container {
+      position: absolute;
+      /* 使用绝对定位 */
+      /* bottom: 100px;  */
+      /* 距离父节点底部20像素 */
+      left: 50%;
+      transform: translateX(-50%) scale(0.8);
+      /* 缩小80% */
+      height: auto;
+      /* 高度自适应，以保持图片比例 */
+      z-index: 10000;
+      /* GIF在最上层 */
+      pointer-events: none;
+      /* 防止GIF阻挡其他元素的交互 */
+    }
+
+    .gif-container img {
+      width: 100%;
+      /* GIF宽度与容器宽度一致 */
+      height: 100%;
+      /* GIF高度与容器高度一致 */
+    }
+
+    /* 默认样式，适用于较大屏幕 */
+    .gif-container {
+      bottom: 40px;
+      /* 默认距离底部20像素 */
+    }
+
+    /* 小屏幕设备 */
+    @media (max-height: 480px) {
+      .gif-container {
+        bottom: 40px;
+        /* 小屏幕上距离底部10像素 */
+      }
+    }
+
+    /* 中等屏幕设备 */
+    @media (min-height: 481px) and (max-height: 768px) {
+      .gif-container {
+        bottom: 60px;
+        /* 中等屏幕上距离底部15像素 */
+      }
+    }
+
+    /* 大屏幕设备 */
+    @media (min-height: 769px) {
+      .gif-container {
+        bottom: 100px;
+        /* 大屏幕上距离底部20像素 */
+      }
+    }
+
+    /* 超级小屏幕设备 */
+    @media (max-height: 600px) {
+      .center-image {
+        top: 115%;
+
+      }
+
+      .center-image img {
+        width: 45%;
+        height: 45%;
+      }
+
+      .gif-container {
+        bottom: 20px;
+        /* 中等屏幕上距离底部15像素 */
+      }
+    }
+
+    /* 极端小屏幕设备 */
+    @media (max-height: 500px) and (max-width: 400px) {
+      .center-image {
+        top: 123%;
+
+      }
+
+      .center-image img {
+        width: 43%;
+        height: 43%;
+      }
+
+      .gif-container {
+        bottom: 10px;
+        /* 中等屏幕上距离底部15像素 */
+      }
+    }
+
+    /* yuchen lili ipad设备 */
+    @media (min-height: 500px) and (max-height: 600px) and (max-width: 400px) {
+      .center-image {
+        top: 110%;
+
+      }
+
+      .center-image img {
+        width: 48%;
+        height: 48%;
+      }
+
+      .gif-container {
+        bottom: 10px;
+        /* 中等屏幕上距离底部15像素 */
+      }
+    }
+
+        /* 极端小屏幕设备 */
+        @media (min-height: 600px) and (max-height: 650px) and (min-width: 400px) and (max-width: 500px){
+      .center-image {
+        top: 95%;
+
+      }
+
+      .center-image img {
+        width: 57%;
+        height: 57%;
+      }
+
+      .gif-container {
+        bottom: 5px;
+        /* 中等屏幕上距离底部15像素 */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root">
+
+  </div>
+  <div class="center-image" id="centeredImage">
+   
+    <img src="https://catoss.s3.ap-southeast-1.amazonaws.com/telegram/loadingBg.jpeg" alt="Centered Image" />
+  </div>
+  <div class="gif-container" id="gifLoading">
+    
+    <img src="https://catoss.s3.ap-southeast-1.amazonaws.com/telegram/loading.gif" alt="Loading GIF" />
+  </div>
+</body>
+
+<!-- <script src="%PUBLIC_URL%/spine_js/pixi.min.js" charset="utf-8"> </script>
+<!-- <script type="text/javascript" src="https://pixijs.download/v4.5.1/pixi.min.js"></script> -->
+<!-- <script src="%PUBLIC_URL%/spine_js/pixi-spine.js" charset="utf-8"> </script> --> -->
+
+<!-- <script>
+  // 确保Spine动画文件的路径是正确的
+  const spineJsonUrl = 'img/body.json';
+  const spineAtlasUrl = 'img/body.atlas';
+  const spineImageDir = 'img/body.png'; // 图片文件夹路径
+  PIXI.Loader.shared.reset();
+  // 创建Pixi应用
+  const spineApp = new PIXI.Application({
+      width: 720, // 舞台宽度
+      height: 1280, // 舞台高度
+      backgroundColor: 0xffffff, // 背景颜色
+      view: document.getElementById('canvas') // 指定渲染视图的容器
+    });
+  //document.body.appendChild(spineApp.view); // 将视图添加到HTML文档中
+  // 加载Spine动画数据和图集
+  PIXI.Loader.shared.
+    add("body", "img2/body.json", { crossOrigin: true }).
+    add("esfp", "img2/esfp.json", { crossOrigin: true }).
+    add("loading", "img2/loading.json", { crossOrigin: true }).
+    add("loading2", "img2/loading2.json", { crossOrigin: true }).
+    add("login", "img2/login.json", { crossOrigin: true }).
+    load(onAssetsLoaded); // 使用onAssetsLoaded作为加载完成的回调函数
+
+  function onAssetsLoaded(loader, res) {
+    const spine4 = spineApp.stage.addChild(new PIXI.spine.Spine(res.loading2.spineData));
+    spine4.state.setAnimation(0, 'action', false)
+    spine4.scale.x = 0.9; 
+    spine4.scale.y = 0.9; 
+    spine4.x -= 90
+    spine4.y -= 50
+    spine4.state.addListener(({
+      complete: function(){
+        spine4.state.setAnimation(0, 'idle', true
+        )
+      }
+    }))
+
+    const spine5 = spineApp.stage.addChild(new PIXI.spine.Spine(res.login.spineData));
+    spine5.state.setAnimation(0, 'action', false)
+    spine5.scale.x = 0.9; 
+    spine5.scale.y = 0.9; 
+    spine5.x -= 90
+    spine5.y -= 50
+    spine5.state.addListener(({
+      complete: function(){
+        spine5.state.setAnimation(0, 'idle', true
+        )
+      }
+    }))
+
+    const spine1 = spineApp.stage.addChild(new PIXI.spine.Spine(res.body.spineData));
+    spine1.state.setAnimation(0, 'action', false)
+    spine1.scale.x = 0.9; 
+    spine1.scale.y = 0.9; 
+    spine1.x -= 90
+    spine1.y -= 50
+    spine1.state.addListener(({
+      complete: function(){
+        spine1.state.setAnimation(0, 'idle', true
+        )
+      }
+    }))
+
+    const spine2 = spineApp.stage.addChild(new PIXI.spine.Spine(res.esfp.spineData));
+    spine2.state.setAnimation(0, 'action', false)
+    spine2.scale.x = 0.9; 
+    spine2.scale.y = 0.9;
+    spine2.x -= 90  
+    spine2.y -= 50
+    spine2.state.addListener(({
+      complete: function(){
+        spine2.state.setAnimation(0, 'idle', true
+        )
+      }
+    }))
+
+    const spine3 = spineApp.stage.addChild(new PIXI.spine.Spine(res.loading.spineData));
+    spine3.state.setAnimation(0, 'action', false)
+    spine3.scale.x = 0.9; 
+    spine3.scale.y = 0.9; 
+    spine3.x -= 90
+    spine3.y -= 50
+    spine3.state.addListener(({
+      complete: function(){
+        spine3.state.setAnimation(0, 'idle', true
+        )
+      }
+    }))
+  }
+</script> -->
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="%PUBLIC_URL%/cat/src/polyfills.bundle.js" charset="utf-8"></script>
+<script>
+  window.production_json_url = "https://catoss.s3.ap-southeast-1.amazonaws.com/production_remote/ing/settings.json"
+  window.develop_json_url = "https://catoss.s3.ap-southeast-1.amazonaws.com/develop_remote/infinity_grount_remote/settings.json"
+  const tg = window?.Telegram?.WebApp;
+  if (tg) {
+    tg.ready();
+    tg.expand();
+    tg.isClosingConfirmationEnabled = true
+  }
+</script>
+
+<script src="https://unpkg.com/@tonconnect/ui@2.0.0/dist/tonconnect-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+
+<!-- SystemJS support. -->
+<script src="%PUBLIC_URL%/cat/src/system.bundle.js" charset="utf-8"> </script>
+
+<!-- Import map -->
+<script src="%PUBLIC_URL%/cat/src/import-map.json" type="systemjs-importmap" charset="utf-8"> </script>
+<script>
+
+
+  // window.showCanvas = function () {
+  //   document.getElementById('canvas').style.display = 'block';
+  // };
+
+  window.hideCanvas = function () {
+    document.getElementById('centeredImage').style.display = 'none';
+    document.getElementById('gifLoading').style.display = 'none';
+  };
+
+  window.startCanvas = function (params) {
+    System.import('%PUBLIC_URL%/cat/index.js').catch(function (err) {
+      console.error(err);
+    })
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>
+  const whiteList = [7124825302,6703818363,6907263914,7435535526,6251616080, 7677095497]
+  if (whiteList.indexOf(window?.Telegram?.WebApp?.initDataUnsafe?.user?.id) >= 0) {
+  eruda.init();
+  }
+</script>
+
+</html>

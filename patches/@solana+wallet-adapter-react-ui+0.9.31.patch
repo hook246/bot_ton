@@ -1,0 +1,53 @@
+diff --git a/node_modules/@solana/wallet-adapter-react-ui/src/WalletDisconnectButton.tsx b/node_modules/@solana/wallet-adapter-react-ui/src/WalletDisconnectButton.tsx
+index 909f682..ae4d908 100644
+--- a/node_modules/@solana/wallet-adapter-react-ui/src/WalletDisconnectButton.tsx
++++ b/node_modules/@solana/wallet-adapter-react-ui/src/WalletDisconnectButton.tsx
+@@ -18,6 +18,7 @@ export const WalletDisconnectButton: FC<ButtonProps> = ({ children, disabled, on
+     );
+ 
+     const content = useMemo(() => {
++        console.log('=====disconnect')
+         if (children) return children;
+         if (disconnecting) return 'Disconnecting ...';
+         if (wallet) return 'Disconnect';
+diff --git a/node_modules/@solana/wallet-adapter-react-ui/src/WalletMultiButton.tsx b/node_modules/@solana/wallet-adapter-react-ui/src/WalletMultiButton.tsx
+index f1455a4..1996c43 100644
+--- a/node_modules/@solana/wallet-adapter-react-ui/src/WalletMultiButton.tsx
++++ b/node_modules/@solana/wallet-adapter-react-ui/src/WalletMultiButton.tsx
+@@ -8,6 +8,23 @@ import { WalletConnectButton } from './WalletConnectButton.js';
+ import { WalletIcon } from './WalletIcon.js';
+ import { WalletModalButton } from './WalletModalButton.js';
+ 
++declare global {
++    interface Window {
++      myProperty: any;
++      startCanvas: any;
++  
++      particle_login: any;
++      particle_logout: any
++      getParticleUserId: any
++  
++      trustwallet: any
++      trustLogin: any
++      trustAccount: any
++      solanaWallect: any
++      solanaPublicKey: any
++    }
++  }
++
+ export const WalletMultiButton: FC<ButtonProps> = ({ children, ...props }) => {
+     const { publicKey, wallet, disconnect } = useWallet();
+     const { setVisible } = useWalletModal();
+@@ -17,6 +34,12 @@ export const WalletMultiButton: FC<ButtonProps> = ({ children, ...props }) => {
+ 
+     const base58 = useMemo(() => publicKey?.toBase58(), [publicKey]);
+     const content = useMemo(() => {
++        //if(wallet?.adapter.publicKey !== null){
++        console.log('========')
++        const solanaWallect = wallet
++            window.solanaWallect = solanaWallect
++            window.solanaPublicKey = base58?.slice(0, 4) + '..' + base58
++        //}
+         if (children) return children;
+         if (!wallet || !base58) return null;
+         return base58.slice(0, 4) + '..' + base58.slice(-4);

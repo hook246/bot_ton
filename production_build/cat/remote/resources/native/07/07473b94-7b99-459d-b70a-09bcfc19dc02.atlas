@@ -1,0 +1,41 @@
+
+2_2.png
+size: 58,78
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 2, 39
+  size: 37, 37
+  orig: 37, 37
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 2, 17
+  size: 45, 20
+  orig: 45, 20
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 2, 2
+  size: 27, 13
+  orig: 27, 13
+  offset: 0, 0
+  index: -1
+4
+  rotate: true
+  xy: 41, 39
+  size: 30, 13
+  orig: 30, 13
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 31, 2
+  size: 25, 13
+  orig: 25, 13
+  offset: 0, 0
+  index: -1

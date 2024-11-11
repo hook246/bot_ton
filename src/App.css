@@ -1,0 +1,157 @@
+html {
+	-ms-touch-action: none;
+  }
+
+  .modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1000; /* 确保覆盖层位于最上层 */
+  }
+  
+  .modal-content {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: white;
+	padding: 20px;
+	border-radius: 5px;
+	z-index: 1001; /* 确保内容位于覆盖层之上 */
+  }
+  
+  body, canvas, div {
+	display: block;
+	outline: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  
+  /* Remove spin of input type number */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+	  /* display: none; <- Crashes Chrome on hover */
+	  -webkit-appearance: none;
+	  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  
+  body {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	border: 0;
+	margin: 0;
+  
+	cursor: default;
+	color: #888;
+	background-color: #333;
+  
+	text-align: center;
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+  
+	display: flex;
+	flex-direction: column;
+  }
+  
+  /* 将 Cocos2dGameContainer 的大小设置为父容器的一定比例 */
+  #Cocos2dGameContainer {
+	width: 50%; /* 或者其他百分比 */
+	height: 50%; /* 或者其他百分比 */
+	top: 25%;
+	left: 25%;
+	/* 其他样式保持不变 */
+  }
+  
+  /* 调整 GameDiv, Cocos3dGameContainer, GameCanvas 的大小 */
+  /* #GameDiv, #Cocos3dGameContainer, #GameCanvas {
+	width: 100%;
+	height: 100vh; 
+  } 
+  */
+  
+  /* 使用媒体查询为小屏幕设备定义更小的界面大小 */
+  @media (max-width: 768px) {
+	#Cocos2dGameContainer {
+	  width: 75%;
+	  height: 75%;
+	  top: 15%;
+	  left: 15%;
+	}
+  
+	/* #GameDiv, #Cocos3dGameContainer, #GameCanvas {
+	  height: 75vh;
+	} */
+  }
+  
+  canvas {
+	background-color: rgba(0, 0, 0, 0);
+  }
+  
+  a:link, a:visited {
+	color: #666;
+  }
+  
+  a:active, a:hover {
+	color: #666;
+  }
+  
+  p.header {
+	font-size: small;
+  }
+  
+  p.footer {
+	font-size: x-small;
+  }
+  
+  .progress-bar {
+	  background-color: #1a1a1a;
+	  position: absolute;
+	  left: 25%;
+	  top: 80%;
+	  height: 14px;
+	  padding: 5px;
+	  width: 50%;
+	  /*margin: 0 -175px;         */
+	  border-radius: 5px;
+	  box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;           
+  }
+  
+  .progress-bar span {
+	  display: block;
+	  height: 100%;
+	  border-radius: 3px;
+	  box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
+	  transition: width .4s ease-in-out; 
+	  background-color: #34c2e3;    
+  }
+  
+  .stripes span {
+	  background-size: 30px 30px;
+	  background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+						  transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+						  transparent 75%, transparent);            
+	  
+	  animation: animate-stripes 1s linear infinite;             
+  }
+  
+  @keyframes animate-stripes {
+	  0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+  }
+  
+  #GameDiv, #Cocos3dGameContainer, #GameCanvas {
+	height: 100%;
+	width: 100%;
+  }
+  
